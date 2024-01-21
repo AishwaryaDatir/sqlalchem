@@ -1,5 +1,5 @@
 #SQLAlchemy
-'''
+
 from sqlalchemy import create_engine,Column,Integer,String
 from sqlalchemy.orm import declarative_base,sessionmaker
 db_url="mysql://root:root@127.0.0.1:3306/sqldb"
@@ -82,67 +82,6 @@ while True:
             
     sess.commit()
     sess.close()
-
-'''
-from sqlalchemy import create_engine,Column,Integer,String
-from sqlalchemy.orm import declarative_base,sessionmaker
-
-db_url="mysql://root:root@127.0.0.1:3306/sqldb"
-
-Eng=create_engine(db_url)
-print(Eng)
-
-Base=declarative_base()
-
-class Student(Base):
-    __tablename__="employee"
-    eid=Column(Integer,primary_key=True)
-    name=Column(String(23))
-    salary=Column(Integer)
-    def __str__(self):
-        return f"Eid:{self.eid}\nName:{self.name}\nSalary:{self.salary}"
-
-Base.metadata.create_all(Eng)
-print("Table created successfully")
-
-Session=sessionmaker(bind=Eng)
-sess=Session()
-
-
-##insert Data
-while True:
-    ch=int(input("####MENU####\n1.Add Record\n2.Show Record\n3.Update Record\n4.Delete Record\n5.Exit\nEnter your choice"))
-    if ch==1:
-        l=[]
-        n=int(input("How many records you want to add"))
-        for i in range(n):
-           e=int(input("enter Eid number"))
-           n=input("enter name:")
-           s=int(input("enter salary:"))
-           ob=Student(eid=e,name=n,salary=s)
-           l.append(ob)
-           sess.add_all(l)
-           print("data added successfully")
-
-   elif ch==2:
-       
-sess.commit()    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
